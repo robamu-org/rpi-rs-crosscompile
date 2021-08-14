@@ -25,7 +25,7 @@ cargo build --target armv7-unknown-linux-gnueabihf
 
 3. Install a cross-compile toolchain and add it to your path.
    You can download one built with crosstool-ng from
-   [here](https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0).
+   [here](https://www.dropbox.com/sh/gn9bo472yalknra/AABOghC1ym1CmjL8_XZSzGdma?dl=0).
 
 4. Install `sshpass`
 
