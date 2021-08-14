@@ -73,8 +73,10 @@ if [ ${arg_help} = y ]; then
 fi
 
 cargo_opts=""
-if [ ${arg_release} = y ]; then
+build_folder="debug"
+if [ arg_release = y ]; then
     cargo_opts+="--release"
+    build_folder="release"
 fi
 
 target="armv7-unknown-linux-gnueabihf"
@@ -88,7 +90,7 @@ elif [ ${arg_ssh_env} = y ]; then
 fi
 
 if [ ${arg_transfer} = y ]; then
-    app_loc="./target/${target}/debug/${app_name}"
+    app_loc="./target/${target}/${build_folder}/${app_name}"
     app_target="${pi_user}@${pi_addr}:\"~/${app_name}\""
     transfer_cmd="sshpass ${sshpass_args} scp ${app_loc} ${app_target}"
     echo "Running transfer command: ${transfer_cmd}"
