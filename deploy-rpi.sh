@@ -34,7 +34,7 @@ sshkey_file=""
 while (( "${#}" )); do
 case "${1}" in
     -t|--transfer)
-        arg_help=y
+        arg_transfer=y
         shift
         ;;
     -h|--help)
@@ -73,7 +73,7 @@ if [ ${arg_help} = y ]; then
 fi
 
 cargo_opts=""
-if [ arg_release = y ]; then
+if [ ${arg_release} = y ]; then
     cargo_opts+="--release"
 fi
 
@@ -87,9 +87,14 @@ elif [ ${arg_ssh_env} = y ]; then
     sshpass_args="-e"
 fi
 
-if [ arg_transfer = y ]; then
-	sshpass ${sshpass_args} q7s-cp.py ./target/${target}/debug/${app_name}
-    if [ arg_run = y ]; then
-        sshpass ${sshpass_args} ssh -p 1535 ${pi_user}@${pi_addr} "./${app_name}"
+if [ ${arg_transfer} = y ]; then
+    app_loc="./target/${target}/debug/${app_name}"
+    app_target="${pi_user}@${pi_addr}:\"~/${app_name}\""
+    transfer_cmd="sshpass ${sshpass_args} scp ${app_loc} ${app_target}"
+    echo "Running transfer command: ${transfer_cmd}"
+    eval ${transfer_cmd}
+    if [ ${arg_run} = y ]; then
+        echo "Running transferred executable.."
+        sshpass ${sshpass_args} ssh ${pi_user}@${pi_addr} "./${app_name}"
     fi
 fi
