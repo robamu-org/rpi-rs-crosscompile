@@ -7,7 +7,8 @@ app_name="rpi-rs-crosscompile"
 read -r -d '' cli_help <<EOD
 Raspberry Pi Rust Deployment Helper
 
-Builds the image and can optionally transfer it to the target system as well.
+Builds the image and can optionally transfer and run it on the target system
+as well.
 
 Usage:
     ${scriptname} [flags] [options]
@@ -74,13 +75,13 @@ fi
 
 cargo_opts=""
 build_folder="debug"
-if [ arg_release = y ]; then
+if [ ${arg_release} = y ]; then
     cargo_opts+="--release"
     build_folder="release"
 fi
 
 target="armv7-unknown-linux-gnueabihf"
-cargo build ${cargo_opts} --target ${target}
+cargo build ${cargo_opts}
 
 sshpass_args=""
 if [ ${arg_ssh_file} = y ]; then
