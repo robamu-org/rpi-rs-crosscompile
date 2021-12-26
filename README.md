@@ -18,8 +18,9 @@ You can tweak the `DEFAULT_*` parameters in the `bld-deploy-remote.py` script an
 
 # Build with `cargo`
 
-Make sure you can use the cross-toolchain linker, for example by running
-`arm-linux-gnueabihf-gcc -v` or `armv8-rpi4-linux-gnueabihf-gcc -v`.
+This is based on [this excellent guide](https://chacin.dev/blog/cross-compiling-rust-for-the-raspberry-pi/).
+Make sure you have installed a Raspberry Pi cross-compiler and that you can use the cross-toolchain
+linker, for example by running `arm-linux-gnueabihf-gcc -v` or `armv8-rpi4-linux-gnueabihf-gcc -v`.
 
 If this works, you can build the debug image with `cargo`:
 
