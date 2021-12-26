@@ -5,7 +5,9 @@ This is a template repository to cross-compile Rust applications for a Raspberry
 easily. I have only found bits and pieces in the Internet on how to properly do this, and
 this repository is a result of gathering those and packaging them into a template repository.
 I specifically targetted debugging with the command line and with VS Code as those
-tools are most commonly used in Rust development.
+tools are most commonly used in Rust development. The instrutions provided here have been
+tested on Linux (Ubuntu 21.04) and Windows 10, but I really recommend to use a Linux
+development hosted when developing anything for an Embedded Linux board.
 
 If you are only interested in remotely running
 your applications and relying on printouts, LEDs or other means to debug your software,
@@ -46,19 +48,21 @@ You can also use the following commands
 **Unix**
 
 ```sh
-python3 bld-deploy-rpi.py -d -t -r
+python3 bld-deploy-remote.py -d -t -r
 ```
 
 **Windows**
 
 ```sh
-py bld-deploy-rpi.py -d -t -r
+py bld-deploy-remote.py -d -t -r
 ```
 
 # Debug on Raspberry Pi
 
 You can also debug your application in the command line or with VS code. There are different ways
-to do this
+to do this. Make sure you have a GDB application like `gdb-multiarch` or `arm-linux-gnueabihf-gdb`
+installed and pass it to the `bld-deploy-remote.py` script with the `--gdb` argument.
+You can also do this in the `.cargo/config.toml` file.
 
 ## Debug on command line
 
@@ -67,21 +71,22 @@ If you selected the following runners in your `.cargo/config.toml`
 **Windows**
 
 ```toml
-runner = "py bld-deploy-rpi.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
 ```
 
 **Unix**
 
 ```toml
-runner = "python3 bld-deploy-rpi.py -t -d -s --source"
+runner = "python3 bld-deploy-remote.py -t -d -s --source"
 ```
 
 You can use `cargo run` to debug your application in the command line.
-Otherwise, you can call `bld-deploy-rpi.py` with the `-b -t -d -s <application> <cargo flags>`
+Otherwise, you can call `bld-deploy-remote.py` with the `-b -t -d -s <application> <cargo flags>`
 arguments to do this.
 
 ## Debug with VS Code, `gdbserver` started by VS Code
 
+Make sure that you can build and run your application remotely first like specified above.
 A `launch.json` file was provided to do this, but right now, it is not possible to get debug output
 from the debugged application in VS Code if VS code starts the GDB server. If you require this,
 use the configuration below.
@@ -101,13 +106,13 @@ Make sure to select of the following runners in your `.cargo/config.toml`
 **Windows**
 
 ```toml
-runner = "py bld-deploy-rpi.py -t -d --source"
+runner = "py bld-deploy-remote.py -t -d --source"
 ```
 
 **Unix**
 
 ```toml
-runner = "python3 bld-deploy-rpi.py -t -d --source"
+runner = "python3 bld-deploy-remote.py -t -d --source"
 ```
 
 1. Use `cargo run` to transfer the application and start the GDB server on the Raspberry Pi
