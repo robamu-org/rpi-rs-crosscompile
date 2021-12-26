@@ -20,7 +20,8 @@ linker = "armv8-rpi4-linux-gnueabihf-gcc"
 
 # Requires Python3 installation. Takes care of transferring and running the application
 # to the Raspberry Pi
-runner = "py bld-deploy-rpi.py -t -r --source"
+# runner = "py bld-deploy-remote.py -t -r --source"
+runner = "python3 bld-deploy-remote.py -t -r --source"
 
 # Debug configurations
 
@@ -29,11 +30,13 @@ runner = "py bld-deploy-rpi.py -t -r --source"
 # This requires a gdbserver installation on the remote machine and a GDB application
 # installation on the local machine
 
-# Only start server.Use cargo run to start the gdbserver, and then launch
+# Only start server. Use cargo run to start the gdbserver, and then launch
 # a GDB application or VS Code with the CodeLLDB plugin to debug your application.
-# runner = "py bld-deploy-rpi.py -t -d --source
-# Start GDB application in command lime as well
-# runner = "py bld-deploy-rpi.py -t -d -s --gdb gdb-multiarch --source"
+# runner = "py bld-deploy-remote.py -t -d --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
+# Start GDB application in command line as well
+# runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
+# runner = "python3 bld-deploy-remote.py -t -d --source"
 
 [build]
 # Raspberry Pi 0/1
