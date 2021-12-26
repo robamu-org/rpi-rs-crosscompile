@@ -5,10 +5,13 @@
 # Cross-compiling an application for the Raspberry Pi requires a toolchain for the linker.
 # Make sure to add the cross-compiler binary path to your system path and then
 # set the "*-gcc" binary as the linker
-# You can download a corss-compiler build with crosstool-ng from here for Unix systems:
+
+# You can download a cross-compiler built with crosstool-ng from here for Unix systems:
 # https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0
+
 # For Windows, it is recommended to get the the toolchain from SysProgs:
 # https://gnutoolchains.com/raspberry/
+
 # If you use a different cross-compiler, adapt this flag accordinlgy.
 linker = "armv8-rpi4-linux-gnueabihf-gcc"
 # linker = "arm-linux-gnueabihf-gcc"
