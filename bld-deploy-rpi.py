@@ -18,10 +18,7 @@ DEFAULT_TOOLCHAIN: Final = "armv7-unknown-linux-gnueabihf"
 DEFAULT_APP_NAME: Final = "rpi-rs-crosscompile"
 DEFAULT_TARGET_FOLDER: Final = "/tmp"
 DEFAULT_DEBUG_PORT: Final = "17777"
-if platform.system() == "Windows":
-    DEFAULT_GDB_APP = "arm-none-eabi-gdb"
-else:
-    DEFAULT_GDB_APP = "gdb-multiarch"
+DEFAULT_GDB_APP = "gdb-multiarch"
 
 
 def main():
@@ -102,6 +99,11 @@ def parse_arguments():
         help="Start local GDB session, connecting to the remote GDB server"
     )
     parser.add_argument(
+        "--gdb",
+        default="gdb-multiarch",
+        help="GDB application to use"
+    )
+    parser.add_argument(
         "-p",
         "--port",
         default=f"{DEFAULT_DEBUG_PORT}",
@@ -140,7 +142,9 @@ def bld_deploy_run(args):
     elif args.sshenv:
         sshpass_args = "-e"
     ssh_target_ident = f"{args.user}@{args.address}"
-    sshpass_cmd = f"sshpass {sshpass_args}"
+    sshpass_cmd = ""
+    if platform.system() != "Windows":
+        sshpass_cmd = f"sshpass {sshpass_args}"
     dest_path = f"{args.dest}/{args.app}"
     if not args.source:
         source_path = f"{os.getcwd()}/target/{args.tc}/{build_folder}/{args.app}"
@@ -172,7 +176,7 @@ def bld_deploy_run(args):
         print(f"Running debug command: {debug_cmd}")
         os.system(debug_cmd)
         if args.start:
-            start_cmd = f"{DEFAULT_GDB_APP} -q -x gdb.gdb"
+            start_cmd = f"{args.gdb} -q -x gdb.gdb"
             print(f"Running start command: {start_cmd}")
             os.system(start_cmd)
 
