@@ -5,20 +5,35 @@
 # Cross-compiling an application for the Raspberry Pi requires a toolchain for the linker.
 # Make sure to add the cross-compiler binary path to your system path and then
 # set the "*-gcc" binary as the linker
-# You can download a corss-compiler build with crosstool-ng from here:
+# You can download a corss-compiler build with crosstool-ng from here for Unix systems:
 # https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0
+# For Windows, it is recommended to get the the toolchain from SysProgs:
+# https://gnutoolchains.com/raspberry/
 # If you use a different cross-compiler, adapt this flag accordinlgy.
 linker = "armv8-rpi4-linux-gnueabihf-gcc"
+# linker = "arm-linux-gnueabihf-gcc"
+
+################################################################################
+# Runners
+################################################################################
+
+
 # Requires Python3 installation. Takes care of transferring and running the application
 # to the Raspberry Pi
-# runner = "./bld-deploy-rpi.py -t -r --source"
+runner = "py bld-deploy-rpi.py -t -r --source"
 
-# Debug instead of running. '-d' will start a gdbserver session on port 2331
-# of the remote machine, '-s' will start the GDB application locally as well.
+# Debug configurations
+
+# '-d' will start a gdbserver session on port 2331 of the remote machine,
+# '-s' will start the GDB application locally as well.
 # This requires a gdbserver installation on the remote machine and a GDB application
 # installation on the local machine
-# runner = "./bld-deploy-rpi.py -t -d -s --source"
-runner = "./bld-deploy-rpi.py -t -d --source"
+
+# Only start server.Use cargo run to start the gdbserver, and then launch
+# a GDB application or VS Code with the CodeLLDB plugin to debug your application.
+# runner = "py bld-deploy-rpi.py -t -d --source
+# Start GDB application in command lime as well
+# runner = "py bld-deploy-rpi.py -t -d -s --gdb gdb-multiarch --source"
 
 [build]
 # Raspberry Pi 0/1

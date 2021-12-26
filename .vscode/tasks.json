@@ -19,6 +19,29 @@
             }
         },
         {
+            "label": "rust: run remotely",
+            "type": "shell",
+            "command": "~/.cargo/bin/cargo", // note: full path to the cargo
+            "args": [
+                "run"
+            ],
+            "problemMatcher": [
+                "$rustc"
+            ],
+            "group": "build",
+            "dependsOn": [
+                "rust: cargo build",
+            ],
+            "linux": {
+                "command": "python3",
+                "args": ["bld-deploy-rpi.py", "-t", "-r"],
+            },
+            "windows": {
+                "command": "python.exe",
+                "args": ["${workspaceFolder}\\bld-deploy-rpi.py", "-t", "-r"],
+            },
+        },
+        {
             "label": "rust: remote dbg with server",
             "type": "shell",
             "command": "${workspaceFolder}/bld-deploy-rpi.py",
