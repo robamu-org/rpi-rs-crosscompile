@@ -135,12 +135,11 @@ runner = "python3 bld-deploy-remote.py -t -d --source"
 
 3. Install a cross-compile toolchain and add it to your path.
 
-   **Unix**
-   You can download one built with crosstool-ng from
+   **Unix**: You can download one built with crosstool-ng from
    [here](https://www.dropbox.com/sh/gn9bo472yalknra/AABOghC1ym1CmjL8_XZSzGdma?dl=0).
 
-   **Windows**
-   It is recommended to install the toolchain from [SysProgs](https://gnutoolchains.com/raspberry/)
+   **Windows**: It is recommended to install the toolchain from
+   [SysProgs](https://gnutoolchains.com/raspberry/)
 
 4. Copy the `.cargo/def-config.toml` file to `.cargo/config.toml` and then adapt it to your needs
    to have a starting configuration for the Raspberry Pi. Set the runners and the linker application
