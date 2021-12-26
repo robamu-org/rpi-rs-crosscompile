@@ -1,6 +1,16 @@
 Cross-compiling Rust for the Raspberry Pi
 ======
 
+This is a template repository to cross-compile Rust applications for a Raspberry Pi target more
+easily. I have only found bits and pieces in the Internet on how to properly do this, and
+this repository is a result of gathering those and packaging them into a template repository.
+I specifically targetted debugging with the command line and with VS Code as those
+tools are most commonly used in Rust development.
+
+If you are only interested in remotely running
+your applications and relying on printouts, LEDs or other means to debug your software,
+this repository allows to do this more conveniently as well.
+
 If you have not set up the prerequisites yet, [set them up first](#prerequisites).
 This template project can in principle be adapted to other Embedded Linux boards easily.
 You can tweak the `DEFAULT_*` parameters in the `bld-deploy-remote.py` script and in the
