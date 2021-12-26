@@ -163,7 +163,9 @@ runner = "python3 bld-deploy-remote.py -t -d --source"
    sudo apt-get install gdb-multiarch
    ```
 
-6. It is recommended to install [Python 3.8 or higher](https://www.python.org/downloads/)
+6. It is recommended to install [Python 3.8 or higher](https://www.python.org/downloads/).
+   Otherwise, the `bld-deploy-remote.py` script, which automates a lot of manual commands, can not
+   be used.
 
 ## Using VS Code
 
