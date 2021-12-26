@@ -1,0 +1,65 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "rust: cargo build",
+            "type": "shell",
+            "command": "~/.cargo/bin/cargo", // note: full path to the cargo
+            "args": [
+                "build"
+            ],
+            "problemMatcher": [
+                "$rustc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "rust: remote dbg with server",
+            "type": "shell",
+            "command": "${workspaceFolder}/bld-deploy-rpi.py",
+            "args": ["-t", "-d"],
+            "group": "none",
+            "dependsOn": [
+                "rust: cargo build",
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": [
+                    {
+                      "regexp": ".",
+                      "file": 1,
+                      "location": 2,
+                      "message": 3
+                    },
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern":"^.*Listening on port.*$",
+                    "endsPattern":"^Child exited with status.*$"
+                }
+            }
+        },
+        {
+            "label": "rust: remote dbg external server",
+            "type": "shell",
+            "command": "${workspaceFolder}/bld-deploy-rpi.py",
+            "args": ["-t"],
+            "group": "none",
+            "dependsOn": [
+                "rust: cargo build",
+            ],
+        },
+    ]
+}

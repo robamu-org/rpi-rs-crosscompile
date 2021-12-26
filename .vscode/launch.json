@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // VS Code will also start the server application. Unfortunately, I have not found
+            // a way to make debugging output from the application work, it only works when the
+            // GDB server is started in a separate shell instance.
+            "type": "lldb",
+            "request": "custom",
+            "name": "Remote Debugging With Server",
+            "preLaunchTask": "rust: remote dbg with server",
+            "targetCreateCommands": [
+                "target create ${workspaceFolder}/target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile"
+            ],
+            "processCreateCommands": ["gdb-remote localhost:17777"]
+        },
+        {
+            // It is expected that the user runs the server application.
+            // This can be done using cargo run, as long as the ./bld-deploy-rpi.py -t -d --source
+            // runner is set.
+            "type": "lldb",
+            "request": "custom",
+            "name": "Remote Debugging External Server",
+            "preLaunchTask": "rust: remote dbg external server",
+            "targetCreateCommands": [
+                "target create ${workspaceFolder}/target/armv7-unknown-linux-gnueabihf/debug/rpi-rs-crosscompile"
+            ],
+            "processCreateCommands": ["gdb-remote localhost:17777"]
+        }
+    ]
+}

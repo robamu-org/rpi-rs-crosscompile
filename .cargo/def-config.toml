@@ -1,0 +1,27 @@
+
+# Rename this file to config.toml and adapt it to your needs
+
+[target.armv7-unknown-linux-gnueabihf]
+# Cross-compiling an application for the Raspberry Pi requires a toolchain for the linker.
+# Make sure to add the cross-compiler binary path to your system path and then
+# set the "*-gcc" binary as the linker
+# You can download a corss-compiler build with crosstool-ng from here:
+# https://www.dropbox.com/sh/hkn4lw87zr002fh/AAAO-HxFQzfmmPQQ9KVmoooGa?dl=0
+# If you use a different cross-compiler, adapt this flag accordinlgy.
+linker = "armv8-rpi4-linux-gnueabihf-gcc"
+# Requires Python3 installation. Takes care of transferring and running the application
+# to the Raspberry Pi
+# runner = "./bld-deploy-rpi.py -t -r --source"
+
+# Debug instead of running. '-d' will start a gdbserver session on port 2331
+# of the remote machine, '-s' will start the GDB application locally as well.
+# This requires a gdbserver installation on the remote machine and a GDB application
+# installation on the local machine
+# runner = "./bld-deploy-rpi.py -t -d -s --source"
+runner = "./bld-deploy-rpi.py -t -d --source"
+
+[build]
+# Raspberry Pi 0/1
+# target = "arm-unknown-linux-gnueabihf"
+# Raspberry Pi 2/3/4
+target = "armv7-unknown-linux-gnueabihf"

@@ -89,15 +89,18 @@ if [ ${arg_ssh_file} = y ]; then
 elif [ ${arg_ssh_env} = y ]; then
     sshpass_args="-e"
 fi
-
+sshpass_cmd="sshpass ${sshpass_args}"
+target_cmd="\"/tmp/${app_name}\""
+ssh_target="${pi_user}@${pi_addr}"
 if [ ${arg_transfer} = y ]; then
     app_loc="./target/${target}/${build_folder}/${app_name}"
-    app_target="${pi_user}@${pi_addr}:\"~/${app_name}\""
-    transfer_cmd="sshpass ${sshpass_args} scp ${app_loc} ${app_target}"
+    transfer_cmd="${sshpass_cmd} scp ${app_loc} ${ssh_target}:${target_cmd}"
     echo "Running transfer command: ${transfer_cmd}"
     eval ${transfer_cmd}
-    if [ ${arg_run} = y ]; then
-        echo "Running transferred executable.."
-        sshpass ${sshpass_args} ssh ${pi_user}@${pi_addr} "./${app_name}"
-    fi
+fi
+
+if [ ${arg_run} = y ]; then
+    run_cmd="${sshpass_cmd} ssh ${ssh_target} ${target_cmd}"
+    echo "Running target application: ${run_cmd}"
+    eval ${run_cmd}
 fi

@@ -1,1 +1,10 @@
+# Cargo build folder. Track Cargo.lock, recommended for binaries
 /target
+
+# Ignore config.toml so that user can configure it without being
+# tracked by git. Default def-config.toml file provided to get
+# started
+/.cargo/config.toml
+
+# User settings
+/.vscode/settings.json
