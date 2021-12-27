@@ -176,6 +176,7 @@ def bld_deploy_run(args):
         print(f"Running debug command: {debug_cmd}")
         os.system(debug_cmd)
         if args.start:
+            time.sleep(0.2)
             start_cmd = f"{args.gdb} -q -x gdb.gdb {source_path}"
             print(f"Running start command: {start_cmd}")
             os.system(start_cmd)
