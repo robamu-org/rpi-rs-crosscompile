@@ -12,7 +12,7 @@
 # For Windows, it is recommended to get the the toolchain from SysProgs:
 # https://gnutoolchains.com/raspberry/
 
-# If you use a different cross-compiler, adapt this flag accordinlgy.
+# If you use a different cross-compiler, adapt this flag accordingly.
 # linker = "armv8-rpi4-linux-gnueabihf-gcc"
 # linker = "arm-linux-gnueabihf-gcc"
 linker = "arm-none-linux-gnueabihf-gcc"
