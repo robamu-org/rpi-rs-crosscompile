@@ -14,8 +14,8 @@
 
 # If you use a different cross-compiler, adapt this flag accordingly.
 # linker = "armv8-rpi4-linux-gnueabihf-gcc"
-# linker = "arm-linux-gnueabihf-gcc"
-linker = "arm-none-linux-gnueabihf-gcc"
+linker = "arm-linux-gnueabihf-gcc"
+# linker = "arm-none-linux-gnueabihf-gcc"
 
 ################################################################################
 # Runners
@@ -40,7 +40,7 @@ runner = "python3 bld-deploy-remote.py -t -r --source"
 # runner = "python3 bld-deploy-remote.py -t -d --source"
 # Start GDB application in command line as well
 # runner = "py bld-deploy-remote.py -t -d -s --gdb arm-linux-gnueabihf-gdb --source"
-# runner = "python3 bld-deploy-remote.py -t -d --source"
+# runner = "python3 bld-deploy-remote.py -t -d -s --source"
 
 [build]
 # Raspberry Pi 0/1
