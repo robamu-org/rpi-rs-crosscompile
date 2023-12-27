@@ -1,3 +1,4 @@
+
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
@@ -30,16 +31,16 @@
             ],
             "group": "build",
             "dependsOn": [
-                "rust: cargo build",
+                "rust: cargo build"
             ],
             "linux": {
                 "command": "python3",
-                "args": ["bld-deploy-remote.py", "-t", "-r"],
+                "args": ["bld-deploy-remote.py", "-t", "-r"]
             },
             "windows": {
                 "command": "python.exe",
-                "args": ["${workspaceFolder}\\bld-deploy-remote.py", "-t", "-r"],
-            },
+                "args": ["${workspaceFolder}\\bld-deploy-remote.py", "-t", "-r"]
+            }
         },
         {
             "label": "rust: remote dbg with server",
@@ -48,16 +49,20 @@
             "args": ["-t", "-d"],
             "group": "none",
             "dependsOn": [
-                "rust: cargo build",
+                "rust: cargo build"
             ],
             "linux": {
                 "command": "python3",
-                "args": ["bld-deploy-remote.py", "-t", "-d"],
+                "args": ["bld-deploy-remote.py", "-t", "-d"]
             },
             "windows": {
                 "command": "python.exe",
-                "args": ["${workspaceFolder}\\bld-deploy-remote.py", "-t", "-d"],
+                "args": ["${workspaceFolder}\\bld-deploy-remote.py", "-t", "-d"]
             },
+
+            // These properties are necessary so the task does not block any launch tasks
+            // waiting on it. We want to keep the GDB server call terminal open to see debugging
+            // output.
             "isBackground": true,
             "problemMatcher": {
                 "pattern": [
@@ -66,12 +71,12 @@
                       "file": 1,
                       "location": 2,
                       "message": 3
-                    },
+                    }
                 ],
                 "background": {
                     "activeOnStart": true,
-                    "beginsPattern":"^.*Listening on port.*$",
-                    "endsPattern":"^Child exited with status.*$"
+                    "beginsPattern": ".",
+                    "endsPattern": "^.*Listening on port .*$"
                 }
             }
         },
@@ -82,8 +87,8 @@
             "args": ["-t"],
             "group": "none",
             "dependsOn": [
-                "rust: cargo build",
-            ],
-        },
+                "rust: cargo build"
+            ]
+        }
     ]
 }

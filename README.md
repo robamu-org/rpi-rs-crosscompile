@@ -9,9 +9,8 @@ tools are most commonly used in Rust development. The instrutions provided here 
 tested on Linux (Ubuntu 21.04) and Windows 10, but I really recommend to use a Linux
 development hosted when developing anything for an Embedded Linux board.
 
-If you are only interested in remotely running
-your applications and relying on printouts, LEDs or other means to debug your software,
-this repository allows to do this more conveniently as well.
+If you are only interested in remotely running your applications and relying on printouts, LEDs or
+other means to debug your software, this repository allows to do this more conveniently as well.
 
 If you have not set up the prerequisites yet, [set them up first](#prerequisites).
 This template project can in principle be adapted to other Embedded Linux boards easily.
@@ -87,13 +86,11 @@ arguments to do this.
 ## Debug with VS Code, `gdbserver` started by VS Code
 
 Make sure that you can build and run your application remotely first like specified above.
-A `launch.json` file was provided to do this, but right now, it is not possible to get debug output
-from the debugged application in VS Code if VS code starts the GDB server. If you require this,
-use the configuration below.
+A `launch.json` file was provided to automatically lauch the application with `gdbserver`
+remotely.
 
-Make sure you installed the `CodeLLDB` plugin for VS Code first.
-Then go to the Run & Debug Tab and use the `Remote Debugging with Server` configuration to debug
-your application
+Make sure you installed the `CodeLLDB` plugin for VS Code first. Then go to the Run & Debug Tab and
+use the `Remote Debugging with Server` configuration to debug your application.
 
 ## Debug with VS Code, `gdbserver` started externally
 
@@ -115,7 +112,8 @@ runner = "py bld-deploy-remote.py -t -d --source"
 runner = "python3 bld-deploy-remote.py -t -d --source"
 ```
 
-1. Use `cargo run` to transfer the application and start the GDB server on the Raspberry Pi
+1. Use `cargo run` in a separate terminal to transfer the application and start the GDB server on
+   the Raspberry Pi.
 2. Use the `Remote Debugging with Server` configuration in the Run & Debug Tab to debug your
    application
 

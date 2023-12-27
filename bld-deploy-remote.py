@@ -57,7 +57,7 @@ def parse_arguments():
     )
     parser.add_argument(
         "--source",
-        help=f"Target destination path. Default: Built from other arguments",
+        help="Target destination path. Default: Built from other arguments",
     )
     parser.add_argument(
         "--dest",
@@ -172,7 +172,13 @@ def bld_deploy_run(args):
         debug_shell_cmd = f"sh -c 'killall -q gdbserver; gdbserver *:{args.port} {dest_path}'"
         # Execute the command above and also set up port forwarding. This allows to connect
         # to localhost:17777 on the local development machine
-        debug_cmd = f"{sshpass_cmd} ssh -f -L {args.port}:localhost:{args.port} {ssh_target_ident} \"{debug_shell_cmd}\""
+        ssh_flags = "-L"
+        if args.start:
+            ssh_flags += " -f"
+        debug_cmd = (
+            f"{sshpass_cmd} ssh {ssh_flags} {args.port}:localhost:{args.port} {ssh_target_ident} "
+            f'"{debug_shell_cmd}"'
+        )
         print(f"Running debug command: {debug_cmd}")
         os.system(debug_cmd)
         if args.start:
